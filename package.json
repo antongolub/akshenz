@@ -1,11 +1,11 @@
 {
-  "name": "blank-ts-repo",
+  "name": "akshenz",
   "version": "0.0.0",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "description": "Blank TS repo",
+  "description": "An experiment to bring GH-like actions to bare Docker",
   "source": "src/main/ts/index.ts",
   "main": "target/bundle/blank-ts-repo.js",
   "module": "target/bundle/blank-ts-repo.js",
@@ -14,7 +14,6 @@
   "typescript": {
     "definition": "typings/index.d.ts"
   },
-
   "scripts": {
     "clean": "rimraf target typings flow-typed buildcache docs coverage buildstamp.json",
     "lint": "eslint src/**/*.{ts,js}",
@@ -50,12 +49,16 @@
     "**/glob-parent": "^6.0.1"
   },
   "dependencies": {
-    "tslib": "^2.4.0"
+    "ajv": "^8.12.0",
+    "js-yaml": "^4.1.0",
+    "tslib": "^2.4.0",
+    "zx": "^7.1.1"
   },
   "devDependencies": {
     "@qiwi/esm": "^1.1.8",
     "@qiwi/libdefkit": "^4.0.8",
     "@qiwi/npm-run-all": "^4.1.7",
+    "@types/js-yaml": "^4.0.5",
     "@types/node": "^16.10.3",
     "c8": "^7.12.0",
     "coveralls": "^3.1.1",
@@ -78,7 +81,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/qiwi/blank-ts-repo.git"
+    "url": "https://github.com/antongolub/akshenz.git"
   },
   "keywords": [
     "blank-ts-repo"
@@ -94,8 +97,8 @@
   "author": "Anton Golub <a.golub@qiwi.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/qiwi/blank-ts-monorepo/issues"
+    "url": "https://github.com/antongolub/akshenz/issues"
   },
-  "homepage": "https://github.com/qiwi/blank-ts-monorepo/#readme",
+  "homepage": "https://github.com/antongolub/akshenz/#readme",
   "prettier": "prettier-config-qiwi"
 }
