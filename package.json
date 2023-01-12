@@ -1,7 +1,6 @@
 {
   "name": "akshenz",
   "version": "0.0.0",
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
@@ -43,40 +42,36 @@
     "postupdate": "yarn && yarn test:deps && yarn build && yarn test",
     "updeps": "npm_config_yes=true npx npm-upgrade"
   },
-  "resolutions": {
-    "**/postcss": "^8.2.15",
-    "**/globby/fast-glob": "^3.2.7",
-    "**/glob-parent": "^6.0.1"
-  },
   "dependencies": {
     "ajv": "^8.12.0",
     "js-yaml": "^4.1.0",
-    "tslib": "^2.4.0",
-    "zx": "^7.1.1"
+    "tempy": "^3.0.0",
+    "tslib": "^2.4.1",
+    "zx-extra": "2.5.3"
   },
   "devDependencies": {
     "@qiwi/esm": "^1.1.8",
-    "@qiwi/libdefkit": "^4.0.8",
+    "@qiwi/libdefkit": "^5.0.0",
     "@qiwi/npm-run-all": "^4.1.7",
     "@types/js-yaml": "^4.0.5",
-    "@types/node": "^16.10.3",
+    "@types/node": "^18.11.18",
     "c8": "^7.12.0",
     "coveralls": "^3.1.1",
-    "cpy-cli": "^4.1.0",
+    "cpy-cli": "^4.2.0",
     "earljs": "^0.2.3",
-    "eslint": "^8.20.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-qiwi": "^1.17.4",
-    "microbundle": "^0.15.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-qiwi": "^2.0.8",
+    "microbundle": "^0.15.1",
     "mkdirp": "^1.0.4",
-    "prettier": "^2.7.1",
-    "prettier-config-qiwi": "^1.7.2",
+    "prettier": "^2.8.2",
+    "prettier-config-qiwi": "^2.0.1",
     "rimraf": "^3.0.2",
-    "terser": "^5.14.2",
-    "tsc-esm-fix": "^2.20.0",
-    "tsm": "^2.2.2",
-    "typedoc": "^0.23.9",
-    "typescript": "4.7.4",
+    "terser": "^5.16.1",
+    "tsc-esm-fix": "^2.20.10",
+    "tsm": "^2.3.0",
+    "typedoc": "^0.23.24",
+    "typescript": "4.9.4",
     "uvu": "^0.5.6"
   },
   "repository": {

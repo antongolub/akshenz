@@ -1,7 +1,13 @@
-import { IWorkflow } from '../../main/ts/parser/interface'
+import { expect } from 'earljs'
+import { test } from 'uvu'
 
-// export const build = (image:)
+import { run } from '../../main/ts/runner'
 
-export const run = (workflow: IWorkflow): void => {
-  console.log(workflow)
-}
+test('`runner` builds image(s) and invokes workflow jobs', async () => {
+  await run({
+    name: 'foo',
+    on: 'push',
+  })
+})
+
+test.run()
