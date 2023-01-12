@@ -7,6 +7,15 @@ test('`runner` builds image(s) and invokes workflow jobs', async () => {
   await run({
     name: 'foo',
     on: 'push',
+    jobs: {
+      analyze: {
+        steps: [
+          {
+            uses: 'checkout',
+          }
+        ]
+      }
+    }
   })
 })
 

@@ -13,4 +13,28 @@ test('`parser` throws error on invalid workflow', () => {
   )
 })
 
-test.run()
+test('`parser` parses valid workflow', () => {
+  expect(parse(`
+  name: foo
+  on: push
+  jobs:
+    analyze:
+      steps:
+        - uses: checkout
+`))
+  .toEqual({
+    name: 'foo',
+    on: 'push',
+    jobs: {
+      analyze: {
+        steps: [
+          {
+            uses: 'checkout',
+          }
+        ]
+      }
+    }
+  })
+})
+
+// test.run()

@@ -2,7 +2,7 @@ import {ErrorObject} from 'ajv'
 import {load} from 'js-yaml'
 
 import {IWorkflow} from './interface'
-import {schema,validate} from './schema'
+import { validate } from './schema'
 
 export class ValidationError extends Error {
   constructor(message: string, public errors?: ErrorObject[] | null) {
@@ -21,4 +21,4 @@ export const parse = (value: string): IWorkflow => {
   return raw
 }
 
-export {validate, schema}
+export {validate, schema} from './schema'

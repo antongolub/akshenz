@@ -10,6 +10,45 @@ export const schema = {
     },
     on: {
       type: 'string',
+    },
+    jobs: {
+      type: 'object',
+      patternProperties: {
+        '.*': {
+          type: 'object',
+          properties: {
+            steps: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  uses: {
+                    type: 'string',
+                  },
+                  name: {
+                    type: 'string',
+                  },
+                  with: {
+                    type: 'object',
+                    patternProperties: {
+                      '.*': {
+                        type: 'string',
+                      }
+                    }
+                  },
+                  env: {
+                    type: 'object',
+                    patternProperties: {
+                      '.*': { type: 'string' }
+                    }
+                  }
+                },
+                required: ['uses'],
+              }
+            }
+          }
+        }
+      }
     }
   },
   required: ['name', 'on'],

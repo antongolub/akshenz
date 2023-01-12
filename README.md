@@ -13,9 +13,10 @@ name: CI
 on: push
 ```
 
-## Alternatives
+## Inspiration
 * https://github.com/nektos/act
 * https://github.com/actions/actions-runner-controller
+* https://github.com/jetpack-io/devbox
 
 ## License
 [MIT](LICENSE)
