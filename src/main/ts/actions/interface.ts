@@ -1,6 +1,12 @@
-export type IAction = {
+export type IActionProvider = {
   name: string
-  deps?: string[]
   setup?: string
-  run?: string
+  run?: string,
+  requirements: {
+    distro?: string[]
+    platform: string[] // linux | darwin
+    arch: string[]     // arm64 x64 x86_64 aarch64
+    deps: string[]
+  },
+  schema?: Record<string, any>
 }

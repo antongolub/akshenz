@@ -1,24 +1,53 @@
-import {ErrorObject} from 'ajv'
 import {load} from 'js-yaml'
+import {analyze, TEdges} from 'toposource'
 
-import {IWorkflow} from './interface'
-import { validate } from './schema'
+import {IAction, IPipeline, IWorkflow} from './interface'
+import {validate, ValidationError} from '../schema'
+import {workflowSchema} from './schema'
 
-export class ValidationError extends Error {
-  constructor(message: string, public errors?: ErrorObject[] | null) {
-    super(message)
-    this.errors = errors
+import {getActionProvider, IActionProvider} from '../actions'
+
+export {workflowSchema} from './schema'
+
+export const parse = async (value: string): Promise<IPipeline> => {
+  const workflow = load(value) as IWorkflow
+
+  validate(workflowSchema, workflow)
+
+  const providers = Object.values(workflow.jobs).reduce<Record<string, IActionProvider>>((acc, {steps}) => {
+    (steps as IAction[]).forEach(step => {
+      const name = step.uses
+      if (!name) {
+        return
+      }
+
+      const provider = getActionProvider(name)
+      if (!provider) {
+        throw new ValidationError(`Target action is not found: ${name}`)
+      }
+
+      if (provider?.schema) {
+        validate(provider.schema, step.with)
+      }
+
+      acc[name] = provider
+    })
+
+    return acc
+  }, {})
+
+  return {
+    providers,
+    workflow,
+    topo: getGraph(workflow)
   }
 }
 
-export const parse = (value: string): IWorkflow => {
-  const raw = load(value) as IWorkflow
+const getGraph = (workflow: IWorkflow) => {
+  const edges = Object.entries(workflow.jobs).reduce<TEdges>((acc, [name, {needs}]) => {
+    acc.push(...(needs?.map<[string, string]>(n => [name, n]) ?? [[name]]))
+    return acc
+  }, [])
 
-  if (!validate(raw)) {
-    throw new ValidationError('Invalid workflow', validate.errors)
-  }
-
-  return raw
+  return analyze(edges)
 }
-
-export {validate, schema} from './schema'

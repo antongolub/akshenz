@@ -1,7 +1,9 @@
-import { IAction } from './interface'
+import { IActionProvider } from './interface'
 import { action as checkout } from './checkout'
+
+export * from './interface'
 
 const actions = [checkout]
 
-export const getAction = (name: string): IAction | undefined =>
+export const getActionProvider = (name: string): IActionProvider | undefined =>
   actions.find(action => action.name === name)

@@ -16,12 +16,13 @@ const getActions = (workflow: IWorkflow) => {
   return [...actions].map(getAction).filter(Boolean)
 }
 
-export const build = async (workflow: IWorkflow): Promise<void> => {
+export const build = async (step: string, workflow: IWorkflow): Promise<void> => {
   const tempdir = tempy.temporaryDirectory()
   const os = 'alpine'
   const actions = getActions(workflow)
   const dockerfile = `
   FROM ${os}
+  
 `
   await fs.writeFile(`${tempdir}/Dockerfile`, dockerfile)
 

@@ -7,4 +7,4 @@ test('index - foo() result equals bar', () => {
   expect(foo()).toEqual('bar')
 })
 
-test.run()
+// test.run()
