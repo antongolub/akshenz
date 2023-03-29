@@ -5,6 +5,9 @@ import { parse } from '../../main/ts/parser'
 import { build } from '../../main/ts/builder'
 
 test('`builder` builds an image for the specified step', async () => {
+  const input = {
+    repository: 'https://github.com/semrel-extra/toposource.git'
+  }
   const {workflow, providers} = await parse(`
     name: foo
     on: push
@@ -18,7 +21,8 @@ test('`builder` builds an image for the specified step', async () => {
 
   await build({
     job,
-    providers
+    providers,
+    input
   })
 })
 

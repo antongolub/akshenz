@@ -5,7 +5,7 @@ export const action: IActionProvider = {
   requirements: {
     arch: ['x64'],
     platform: ['linux'],
-    deps: ['git'],
+    deps: ['git', 'openssh'],
   },
   schema: {
     type: 'object',
@@ -13,6 +13,8 @@ export const action: IActionProvider = {
       repository: {type: 'string'}
     }
   },
-  setup: '',
-  run: ''
+  setup: `RUN mkdir -p ~/.ssh && touch ~/.ssh/id_rsa && echo "y\\n" | ssh-keygen -t rsa -C "test.com" -f ~/.ssh/id_rsa -P ""
+RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+`,
+  run: 'git clone ${INPUT_REPOSITORY} ./'
 }
