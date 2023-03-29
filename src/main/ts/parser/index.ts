@@ -26,8 +26,8 @@ export const parse = async (value: string): Promise<IPipeline> => {
         throw new ValidationError(`Target action is not found: ${name}`)
       }
 
-      if (provider?.schema) {
-        validate(provider.schema, step.with)
+      if (provider.schema) {
+        validate(provider.schema, step.with || {})
       }
 
       acc[name] = provider

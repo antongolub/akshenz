@@ -5,7 +5,7 @@ import { parse } from '../../main/ts/parser'
 import { build } from '../../main/ts/builder'
 
 test('`builder` builds an image for the specified step', async () => {
-  const {workflow} = await parse(`
+  const {workflow, providers} = await parse(`
     name: foo
     on: push
     jobs:
@@ -17,7 +17,8 @@ test('`builder` builds an image for the specified step', async () => {
   const job = workflow.jobs[jobId]
 
   await build({
-    actions
+    job,
+    providers
   })
 })
 

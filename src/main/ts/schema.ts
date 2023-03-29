@@ -2,7 +2,7 @@ import Ajv, {ErrorObject} from 'ajv'
 import {memoize} from './util'
 
 const ajv = new Ajv()
-const ajvCompile = memoize(ajv.compile)
+const ajvCompile = memoize(ajv.compile, new Map(), ajv)
 
 export type ISchema = Record<string, any>
 

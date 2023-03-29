@@ -1,4 +1,5 @@
 import {TTopoResult} from 'toposource'
+import {IActionProvider} from "../actions";
 
 export type IEvent = 'push' | 'pull_request' | 'workflow_dispatch'
 
@@ -27,9 +28,7 @@ export interface IJob {
   steps: IStep[]
 }
 
-export type IActionProvidersMap = Record<string, {
-
-}>
+export type IActionProvidersMap = Record<string, IActionProvider>
 
 export interface IPipeline {
   workflow: IWorkflow

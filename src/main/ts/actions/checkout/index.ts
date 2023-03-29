@@ -2,7 +2,6 @@ import {IActionProvider} from '../interface'
 
 export const action: IActionProvider = {
   name: 'checkout',
-  setup: '',
   requirements: {
     arch: ['x64'],
     platform: ['linux'],
@@ -13,5 +12,7 @@ export const action: IActionProvider = {
     properties: {
       repository: {type: 'string'}
     }
-  }
+  },
+  setup: '',
+  run: ''
 }

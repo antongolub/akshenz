@@ -1,7 +1,7 @@
 export type IActionProvider = {
   name: string
-  setup?: string
-  run?: string,
+  setup: string
+  run: string
   requirements: {
     distro?: string[]
     platform: string[] // linux | darwin
