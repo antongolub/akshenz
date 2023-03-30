@@ -40,7 +40,8 @@ export const workflowSchema: ISchema = {
         run: {
           type: 'string',
         }
-      }
+      },
+      required: ['run']
     },
     action: {
       type: 'object',
@@ -74,7 +75,8 @@ export const workflowSchema: ISchema = {
             '.*': { type: 'string' }
           }
         }
-      }
+      },
+      required: ['uses']
     }
   }
 }

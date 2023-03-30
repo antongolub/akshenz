@@ -1,6 +1,4 @@
 import {$, fs, tempy} from 'zx-extra'
-import {IAction, IActionProvidersMap, IJob, ICommand} from '../parser/interface'
-import {envify, envToString} from '../util'
 
 export interface IBuildOptions {
   tag?: string,
@@ -13,10 +11,15 @@ export const build = async({distro = 'debian', deps = [], setups = [], tag: _tag
   const cwd = tempy.temporaryDirectory()
   const tag = `${distro}-deps-${deps.join('-')}`
 
-  if (await $`docker images -q ${tag}`.toString()) {
-    console.log(`image ${tag} exists`)
-    return tag
+  try {
+    // if (await $`docker images -q ${tag}`.toString()) {
+    //   console.log(`image ${tag} exists`)
+    //   return tag
+    // }
+  } catch {
+    console.log('image does not exist, so it will be built')
   }
+
 
   const startSh = `#!/bin/sh
 echo "Akzhenz!"

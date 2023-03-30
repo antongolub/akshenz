@@ -19,12 +19,9 @@ export const action: IActionProvider = {
   setup: '',
   run: `wget -q -O bun.zip https://github.com/oven-sh/bun/releases/download/bun-v$\{ACTION_VERSION\}/bun-linux-aarch64.zip
 unzip bun.zip
-
 mv bun-linux-aarch64/bun /usr/local/bin/bun
 chmod +xrw /usr/local/bin/bun
-
 export PATH=$PATH:/usr/local/bin
-
 rm bun.zip
 `
 }

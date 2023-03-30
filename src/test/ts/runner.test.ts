@@ -1,5 +1,6 @@
 import { test } from 'uvu'
 
+import {$} from 'zx-extra'
 import { run } from '../../main/ts/runner'
 
 test('`builder` builds an image for the specified step', async () => {
@@ -9,13 +10,15 @@ test('`builder` builds an image for the specified step', async () => {
     event_name: 'push'
   }
 
-  const workflow = `
+  const workflow1 = `
     name: foo
     on: push
     jobs:
       analyze:
         steps:
           - uses: checkout
+            with:
+              repository: https://github.com/semrel-extra/topo.git
           - name: test git remote
             run: git remote -v
           - uses: setup-node
@@ -26,9 +29,23 @@ test('`builder` builds an image for the specified step', async () => {
           - uses: setup-bun
             with:
               version: 0.5.0
-          - run: bun -v 
+          - run: bun -v
   `
 
+  const workflow = `
+    name: foo
+    on: push
+    jobs:
+      analyze:
+        steps:
+          - uses: checkout
+            with:
+              repository: https://github.com/semrel-extra/topo.git
+          - name: test git remote
+            run: git remote -v
+  `
+
+  $.verbose = true
   await run(event, workflow)
 })
 

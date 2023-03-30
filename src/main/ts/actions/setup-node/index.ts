@@ -17,7 +17,7 @@ export const action: IActionProvider = {
   defaults: {
     version: '18.15.0'
   },
-  run: `curl https://nodejs.org/dist/v\{ACTION_VERSION\}/node-v$\{ACTION_VERSION\}-linux-arm64.tar.xz -o node.tar.xz
+  run: `curl https://nodejs.org/dist/v\${ACTION_VERSION}/node-v\${ACTION_VERSION}-linux-arm64.tar.xz -o node.tar.xz
 
 mkdir -p /usr/local/node
 tar -xvf node.tar.xz --strip-components=1 -C /usr/local/node
