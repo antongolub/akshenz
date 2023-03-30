@@ -5,6 +5,8 @@ import {parse as parseWorkflow} from '../parser'
 import {asArray, envify, envToString} from '../util'
 import {TTopoResult} from 'toposource'
 
+// $.verbose = true
+
 // https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 // https://github.blog/changelog/2021-11-10-github-actions-input-types-for-manual-workflows/
 export type IEvent = {
@@ -29,8 +31,10 @@ export const run = async (event: IEvent, wf: string): Promise<void> => {
   await traverseQueue({queue, prev: topo.prev, cb: async (name: string) => {
     const {deps, setups, scripts} = parseJob(workflow.jobs[name], providers)
     const tag = await build({deps, setups})
-    const res = await $`docker run -e INPUT_REPOSITORY='${event.repository}' -e SCRIPT=${scripts.join('\n')} docker.io/local/${tag}`
-    console.log(res.stdout.toString())
+
+    // console.log('scripts', scripts.join('\n'))
+    await $`docker run  -e INPUT_REPOSITORY='${event.repository}' -e SCRIPT=${scripts.join('\n')} docker.io/local/${tag}`
+    // console.log(res.stdout.toString())
   }})
 }
 

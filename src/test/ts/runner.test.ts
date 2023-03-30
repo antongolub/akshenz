@@ -8,6 +8,7 @@ test('`builder` builds an image for the specified step', async () => {
     type: 'push',
     event_name: 'push'
   }
+
   const workflow = `
     name: foo
     on: push
@@ -15,8 +16,17 @@ test('`builder` builds an image for the specified step', async () => {
       analyze:
         steps:
           - uses: checkout
-          - name: test
+          - name: test git remote
             run: git remote -v
+          - uses: setup-node
+            with:
+              version: 18.14.0
+          - name: test node
+            run: node -v
+          - uses: setup-bun
+            with:
+              version: 0.5.0
+          - run: bun -v 
   `
 
   await run(event, workflow)

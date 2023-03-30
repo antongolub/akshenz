@@ -9,4 +9,5 @@ export type IActionProvider = {
     deps: string[]
   },
   schema?: Record<string, any>
+  defaults?: Record<string, any>
 }

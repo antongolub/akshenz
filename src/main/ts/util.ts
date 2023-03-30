@@ -12,8 +12,7 @@ export const memoize = (fn: any, memo = new Map(), ctx = {}) => function(...args
 export const asArray = <T>(value: T | T[]): T[] => (Array.isArray(value) ? value : [value])
 
 export const envify = (input: Record<string, string> = {}, prefix = ''): Record<string, string> => Object.entries(input).reduce<Record<string, string>>((acc, [key, value]) => {
-  const k = prefix+key.replace(/\W/g, '_')
-  acc[k] = value
+  const k = (prefix+key).replace(/\W/g, '_')
   acc[k.toUpperCase()] = value
   return acc
 }, {})

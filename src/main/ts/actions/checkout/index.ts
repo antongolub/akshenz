@@ -5,7 +5,7 @@ export const action: IActionProvider = {
   requirements: {
     arch: ['x64'],
     platform: ['linux'],
-    deps: ['git', 'openssh'],
+    deps: ['git'],
   },
   schema: {
     type: 'object',

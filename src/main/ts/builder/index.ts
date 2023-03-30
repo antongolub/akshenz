@@ -9,11 +9,15 @@ export interface IBuildOptions {
   setups?: string[]
 }
 
-export const build = async({distro = 'alpine', deps = [], setups = [], tag: _tag}: IBuildOptions): Promise<string> => {
+export const build = async({distro = 'debian', deps = [], setups = [], tag: _tag}: IBuildOptions): Promise<string> => {
   const cwd = tempy.temporaryDirectory()
-
-
   const tag = `${distro}-deps-${deps.join('-')}`
+
+  if (await $`docker images -q ${tag}`.toString()) {
+    console.log(`image ${tag} exists`)
+    return tag
+  }
+
   const startSh = `#!/bin/sh
 echo "Akzhenz!"
 eval "$SCRIPT"`
@@ -23,8 +27,8 @@ eval "$SCRIPT"`
 
   const dockerfile = `
   FROM ${distro}
-  RUN apk update
-  RUN apk add ${deps.join(' ')}
+  RUN apt-get update
+  RUN apt-get install -y ${deps.join(' ')}
   ${setups.join('\n')}
   COPY start.sh /start.sh
   RUN chmod +x /start.sh
