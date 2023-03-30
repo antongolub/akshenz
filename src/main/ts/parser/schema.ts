@@ -1,4 +1,4 @@
-import {ISchema} from '../schema'
+import {ISchema, STRING_OR_STRING_ARRAY} from '../schema'
 
 // https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 export const workflowSchema: ISchema = {
@@ -7,9 +7,7 @@ export const workflowSchema: ISchema = {
     name: {
       type: 'string',
     },
-    on: {
-      type: 'string',
-    },
+    on: STRING_OR_STRING_ARRAY,
     jobs: {
       type: 'object',
       patternProperties: {
@@ -24,7 +22,8 @@ export const workflowSchema: ISchema = {
                   { $ref: '#/$defs/command' },
                 ]
               }
-            }
+            },
+            on: STRING_OR_STRING_ARRAY
           }
         }
       }

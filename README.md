@@ -13,6 +13,9 @@ name: CI
 on: push
 ```
 
+## Implementation notes
+* 
+
 ## Inspiration
 * https://github.com/nektos/act
 * https://github.com/actions/actions-runner-controller

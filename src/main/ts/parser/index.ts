@@ -12,6 +12,8 @@ export {workflowSchema} from './schema'
 export const parse = async (value: string): Promise<IPipeline> => {
   const workflow = load(value) as IWorkflow
 
+  console.log(workflow)
+
   validate(workflowSchema, workflow)
 
   const providers = Object.values(workflow.jobs).reduce<Record<string, IActionProvider>>((acc, {steps}) => {

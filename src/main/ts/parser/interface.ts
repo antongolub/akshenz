@@ -1,7 +1,7 @@
 import {TTopoResult} from 'toposource'
 import {IActionProvider} from "../actions";
 
-export type IEvent = 'push' | 'pull_request' | 'workflow_dispatch'
+export type IEventName = 'push' | 'pull_request' | 'workflow_dispatch' | string
 
 export interface IAction {
   name?: string
@@ -19,12 +19,13 @@ export type IStep = IAction | ICommand
 
 export interface IWorkflow {
   name?: string
-  on: IEvent
+  on: IEventName | IEventName[]
   jobs: Record<string, IJob>
 }
 
 export interface IJob {
   needs?: string[]
+  on?: IEventName | IEventName[]
   steps: IStep[]
 }
 

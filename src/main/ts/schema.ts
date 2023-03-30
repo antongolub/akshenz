@@ -20,3 +20,7 @@ export const validate = (schema: ISchema, target: any) => {
     throw new ValidationError('Invalid workflow', ajvValidate.errors)
   }
 }
+
+export const STRING = {type: 'string'}
+export const STRING_ARRAY = {type: 'array', items: {type: 'string'}}
+export const STRING_OR_STRING_ARRAY = {anyOf: [STRING, STRING_ARRAY]}
